@@ -59,9 +59,9 @@ def band(str):
         return 2 ** 30
     if str == 'GB':
         return 2 ** 30 * 8
-    if str == 'tB':
-        return 2 ** 40
     if str == 'Tb':
+        return 2 ** 40
+    if str == 'TB':
         return 2 ** 40 * 8
 
 def download_time(num1,str1,num2,str2):
