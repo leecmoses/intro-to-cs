@@ -57,3 +57,46 @@ def fibonacci(n):
     if n == 1:
         return 1
     return fibonacci(n - 1) + fibonacci(n - 2)
+
+'''
+Quiz: Faster Fibonacci
+'''
+def fibonacci(n):
+    current = 0
+    after = 1
+    for i in range (0, n):
+        current, after = after, current + after
+    return current
+
+
+'''
+Circular Definitions
+    * Circular definitions are horrible definitions because it never returns a value. Circular definitions do NOT have a clear base case.
+'''
+
+'''
+Computer Ranks & Finishing Urank
+'''
+def compute_ranks(graph):
+    d = 0.8             # damping factor - Probability that a random selected page is on the current page, rather than starting over with a new random page
+    numloops = 10       # Determines the accuracy of the ranks
+
+    ranks = {}
+    npages = len(graph)
+
+    for page in graph:
+        ranks[page] = 1.0 / npages
+    
+    for i in range(0, numloops):
+        newranks = {}
+        for page in graph:
+            newrank = (1 - d) / npages
+
+            for node in graph:
+                if page in graph[node]:
+                    newrank = newrank + d * (ranks[node] / len(graph[node]))
+            
+            newranks[page] = newrank
+        ranks = newranks
+    return ranks
+
